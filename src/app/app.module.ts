@@ -31,7 +31,7 @@ import { FiltersComponent } from './components/filters/filters.component';
 import { ProductBoxComponent } from './components/product-box/product-box.component'
 
 import { HttpClientModule } from '@angular/common/http';
-import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ProductEditorComponent } from './components/product-editor/product-editor.component';
 import { FormsModule }   from '@angular/forms';
 
 
@@ -46,7 +46,7 @@ import { FormsModule }   from '@angular/forms';
     ProductsHeaderComponent,
     FiltersComponent,
     ProductBoxComponent,
-    ProductFormComponent
+    ProductEditorComponent
   ],
   imports: [
     BrowserModule,

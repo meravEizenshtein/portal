@@ -1,0 +1,71 @@
+  <form class="form-container">
+    <mat-card>
+      <mat-card-header *ngIf="this.mode === 'create'">
+        <mat-card-title>Your New Product Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-header *ngIf="this.mode === 'update'">
+        <mat-card-title>Edit Your Product Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-6" *ngIf="this.mode === 'create'">
+            <mat-form-field>
+              <mat-label>category</mat-label>
+              <mat-select matNativeControl (selectionChange)="getAttributesByCategory($event.value)">
+                <mat-option matInput *ngFor="let category of categories" [value]="category" >
+                  {{category}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <mat-label>title</mat-label>
+              <input matInput name="title" [(ngModel)]="product.title" placeholder="Enter title"/>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field class="full-width">
+              <mat-label>description</mat-label>
+              <textarea matInput name="description" [(ngModel)]="this.product.description" placeholder="Enter description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <mat-label>price</mat-label>
+            <textarea matInput name="price" [(ngModel)]="product.price" placeholder="Enter price"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field class="full-width">
+            <mat-label>contactPhoneNumber</mat-label>
+            <textarea matInput name="contactPhoneNumber" [(ngModel)]="product.contactPhoneNumber" placeholder="Enter phone number"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="row" *ngFor="let attribute of attributes">
+          <div class="col-md-6"  *ngIf="attribute.type === 'list'">
+            <mat-form-field>
+              <mat-label>{{attribute.name}}</mat-label>
+              <mat-select>
+                <mat-option matInput *ngFor="let val of attribute.valueList" [value]="val">
+                  {{val}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6" *ngIf="attribute.type === 'string'">
+            <mat-label>{{attribute.name}}</mat-label>
+            <mat-form-field class="full-width" >
+              <input matInput name=attribute.name [(ngModel)]="attribute.value"/>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions >
+        <button mat-raised-button="" color="primary"  (click)="saveProduct()">Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>

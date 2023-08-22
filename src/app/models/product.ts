@@ -8,6 +8,7 @@ export class Product {
     description:string = '';
     price: number = 0;
     picUrl: string= '';
-    attributes: Attributes[] = [];
+    contactPhoneNumber: string = '';
+    additionalAttributesList : Attributes[] = [];
 
 }

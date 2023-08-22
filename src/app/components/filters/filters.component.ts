@@ -1,6 +1,6 @@
 import { Component,EventEmitter,OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-filters',
@@ -14,10 +14,10 @@ export class FiltersComponent implements OnInit {
 
    categoriesSubscription: Subscription | undefined;
 
-  constructor(private dataService: DataService) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.categoriesSubscription = this.dataService
+    this.categoriesSubscription = this.apiService
       .getAllCategories()
       .subscribe((response: Array<string>) => {
         this.categories = response;

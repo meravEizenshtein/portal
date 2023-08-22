@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
-import { DataService } from 'src/app/services/data.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription | undefined;
 
   constructor(
-    private dateService: DataService
+    private apiService: ApiService
   ) {}
 
   
@@ -29,13 +29,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   
   getProductsByCategory() {
     if (this.category =='all'){
-      this.productsSubscription = this.dateService
+      this.productsSubscription = this.apiService
     .getAllProducts()
     .subscribe((response: Array<Product>) => {
       this.products = response;
     });
     }else{
-    this.productsSubscription = this.dateService
+    this.productsSubscription = this.apiService
     .getProductsByCategory(this.category)
     .subscribe((response: Array<Product>) => {
       this.products = response;
@@ -51,12 +51,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onDeleteProduct(id : string) :void{
     this.deleteProduct(id);
-    this.getProductsByCategory();
   }
   
   deleteProduct(id : string) {
-    this.dateService.deleteProduct(id)
-    .subscribe();
+    this.apiService.deleteProduct(id)
+    .subscribe((data)=>{
+      console.log(data);
+          this.getProductsByCategory();
+    });
   }
 
   ngOnDestroy(): void {

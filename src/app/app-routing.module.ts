@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ProductEditorComponent } from './components/product-editor/product-editor.component';
 
 const routes: Routes = [{
-  path:'home',
+  path:'',
   component: HomeComponent
-},{
-  path:'',redirectTo:'home', pathMatch:'full'
-},
-{
+}
+,{
   path:'add-product',
-  component: ProductFormComponent
-}];
+  component: ProductEditorComponent
+},
+{ path: '**', redirectTo:'/' }];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

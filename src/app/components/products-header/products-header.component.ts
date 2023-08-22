@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Product } from 'src/app/models/product';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-products-header',
@@ -11,7 +14,8 @@ export class ProductsHeaderComponent implements OnInit{
   sort = "desc"; 
   itemsShowCount = 10;
 
-  constructor(){}
+  constructor(private dataService: DataService,
+    private _router: Router){}
   ngOnInit(): void {
     
   }
@@ -22,6 +26,11 @@ export class ProductsHeaderComponent implements OnInit{
 
   onItemsCountUpdated (count: number): void{
     this.itemsShowCount = count;
+}
+
+openAddProductForm(){
+  this.dataService.updateProduct(new Product);
+  this._router.navigate(['add-product']);
 }
 
 }
